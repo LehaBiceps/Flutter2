@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_two/widgets/button_log_screen.dart';
-import 'package:project_two/widgets/logo.dart';
-import 'package:project_two/widgets/text_button.dart';
-import 'package:project_two/widgets/text_field.dart';
-import 'package:project_two/widgets/app_bar.dart';
+import 'package:project_two/widgets/log_reg_screens/button_log_screen.dart';
+import 'package:project_two/widgets/log_reg_screens/logo.dart';
+import 'package:project_two/widgets/log_reg_screens/text_button.dart';
+import 'package:project_two/widgets/log_reg_screens/text_field.dart';
+import 'package:project_two/widgets/log_reg_screens/app_bar.dart';
 
 class FogotPhone extends StatelessWidget {
   const FogotPhone({super.key});
@@ -12,7 +12,7 @@ class FogotPhone extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: customAppBar(context),
+      appBar: customAppBar(context, text: '       Вход'),
       body: Column(
         children: [
           const SizedBox(height: 70),

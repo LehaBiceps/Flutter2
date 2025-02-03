@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-AppBar customAppBar(context)
+AppBar customAppBar(context, {required String text})
 {
   return AppBar(
     backgroundColor: Colors.white,
-    title: const Padding(padding: const EdgeInsets.only(left: 97),
-      child: Text('Вход',
-        style: TextStyle(
+    title: Padding(padding: const EdgeInsets.only(left: 42),
+      child: Text(text,
+        style: const TextStyle(
             fontSize: 32
         ),
       ),
@@ -14,3 +14,4 @@ AppBar customAppBar(context)
     leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: const Icon(Icons.arrow_back)),
   );
 }
+

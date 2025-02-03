@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 Widget textField({
   required String text,
   String? optionalText,
+  Color? optionalColor,
   VoidCallback? onPressed,
   bool showTimer = false,
+  bool obscureText = false,
 }) {
   int remainingTime = 30;
   bool isTimerActive = false;
   late Timer timer;
+  ValueNotifier<bool> obscureNotifier = ValueNotifier<bool>(obscureText);
 
   void startTimer(Function updateState) {
     isTimerActive = true;
@@ -32,17 +35,35 @@ Widget textField({
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              decoration: InputDecoration(
-                hintText: text,
-                hintStyle: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w400,
-                ),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFEE7100)),
-                ),
-              ),
+            ValueListenableBuilder<bool>(
+              valueListenable: obscureNotifier,
+              builder: (context, isObscured, child) {
+                return TextField(
+                  obscureText: isObscured,
+                  decoration: InputDecoration(
+                    hintText: text,
+                    hintStyle: const TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                    ),
+                    enabledBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFEE7100)),
+                    ),
+                    suffixIcon: obscureText
+                        ? IconButton(
+                      icon: Icon(
+                        isObscured ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        obscureNotifier.value = !obscureNotifier.value;
+                      },
+                    )
+                        : null,
+                  ),
+                );
+              },
             ),
             if (optionalText != null && !isTimerActive)
               Padding(
@@ -63,8 +84,8 @@ Widget textField({
                   ),
                   child: Text(
                     optionalText,
-                    style: const TextStyle(
-                      color: Colors.grey,
+                    style: TextStyle(
+                      color: optionalColor,
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                     ),
