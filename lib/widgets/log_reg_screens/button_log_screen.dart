@@ -15,8 +15,7 @@ Widget customButton(
         borderRadius: BorderRadius.circular(10),
       ),
     ),
-    child: Text(
-      text,
+    child: Text(text,
       style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
     ),
   );
